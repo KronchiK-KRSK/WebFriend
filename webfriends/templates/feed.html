@@ -4,9 +4,14 @@
 <div class="block">
   {% for p in feed %}
   <div class="box animate__animated animate__fadeInUp mb-2">
-    <h5 class="title is-6">{{ p.title }}</h5>
-    <p>{{ p.description }}</p>
+    {% if p.__class__.__name__ == 'Event' %}
+      <h5 class="title is-6">{{ p.title }} ({{ p.category }})</h5>
+      <p>{{ p.description }}</p>
+    {% else %}
+      <p><b>{{ p.user.username }}:</b> {{ p.text }}</p>
+    {% endif %}
   </div>
   {% endfor %}
 </div>
+<a href="{{ url_for('status_view') }}" class="button is-primary">Поделиться статусом</a>
 {% endblock %}

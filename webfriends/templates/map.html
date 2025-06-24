@@ -16,6 +16,21 @@
       </b-select>
     </b-field>
   </div>
+  <div class="column">
+    <b-field label="Категория">
+      <b-select id="filterCategory">
+        <option value="">Все</option>
+        <option value="meet">Встреча</option>
+        <option value="sport">Спорт</option>
+        <option value="party">Тусовка</option>
+      </b-select>
+    </b-field>
+  </div>
+  <div class="column">
+    <b-field label="Безопасные">
+      <b-checkbox id="filterSafe"></b-checkbox>
+    </b-field>
+  </div>
 </div>
 <div id="map" style="height:500px;"></div>
 <a href="/create-event" class="button is-primary fab">

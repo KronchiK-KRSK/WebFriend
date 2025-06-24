@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-3">SpeedMeet</h2>
+<div id="status">Ожидание собеседника...</div>
+<video id="remote" autoplay playsinline style="width:100%;max-height:300px"></video>
+<video id="local" autoplay muted playsinline style="width:100px"></video>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://unpkg.com/simple-peer@9.11.1/simplepeer.min.js"></script>
+<script>
+const socket = io();
+let peer;
+socket.emit('speed_join');
+socket.on('speed_start', data => {
+  document.getElementById('status').innerText = 'Соединение...';
+  peer = new SimplePeer({initiator: data.initiator, trickle:false, stream:null});
+  navigator.mediaDevices.getUserMedia({video:true, audio:true}).then(stream => {
+    document.getElementById('local').srcObject = stream;
+    peer.addStream(stream);
+  });
+  peer.on('signal', d => socket.emit('speed_signal', d));
+  peer.on('stream', stream => {
+    document.getElementById('remote').srcObject = stream;
+    document.getElementById('status').innerText = 'Разговор';
+  });
+});
+socket.on('speed_signal', d => peer && peer.signal(d));
+</script>
+{% endblock %}

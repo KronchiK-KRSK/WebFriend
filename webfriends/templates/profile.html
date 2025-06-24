@@ -23,6 +23,9 @@
   <b-field label="Фото профиля">
     <b-input name="photo" type="file" accept="image/*"></b-input>
   </b-field>
+  <b-field label="Доверенный пользователь (ID)">
+    <b-input name="trusted_user_id" type="number" value="{{ user.trusted_user_id }}"></b-input>
+  </b-field>
   <b-field label="Режим невидимки">
     <b-switch name="is_private" {{ 'checked' if user.is_private else '' }}></b-switch>
   </b-field>
@@ -37,6 +40,13 @@
     <img src="{{ url_for('static', filename='uploads/' + user.photo) }}" style="max-width:150px;">
   </div>
   {% endif %}
+  <p class="mb-3">
+    {% if user.is_verified %}
+      <span class="tag is-success">Профиль подтвержден</span>
+    {% else %}
+      <a href="{{ url_for('verify_view') }}" class="button is-small is-warning">Пройти верификацию</a>
+    {% endif %}
+  </p>
 <div class="mt-4">
   <button class="button is-primary" type="submit">Сохранить</button>
 </div>

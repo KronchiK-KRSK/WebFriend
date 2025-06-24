@@ -26,6 +26,9 @@ class User(UserMixin, db.Model):
     phone_confirmed = db.Column(db.Boolean, default=False)
     email_token = db.Column(db.String(120))
     phone_token = db.Column(db.String(120))
+    verification_photo = db.Column(db.String(200))
+    is_verified = db.Column(db.Boolean, default=False)
+    trusted_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def set_password(self, password: str):
         self.password_hash = generate_password_hash(password)
@@ -37,6 +40,8 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120))
     description = db.Column(db.String(250))
+    category = db.Column(db.String(50))
+    is_safe = db.Column(db.Boolean, default=False)
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -46,6 +51,7 @@ class Like(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     target_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     liked = db.Column(db.Boolean, default=True)
+    super = db.Column(db.Boolean, default=False)
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,6 +64,7 @@ class Gift(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
+    coupon_url = db.Column(db.String(200))
 
 class UserGift(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,5 +78,12 @@ class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user1_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user2_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class Status(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    text = db.Column(db.String(250))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 

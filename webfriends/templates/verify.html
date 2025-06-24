@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-3">Верификация</h2>
+<form method="post" enctype="multipart/form-data">
+  <b-field label="Фото-селфи">
+    <b-input type="file" name="photo" required></b-input>
+  </b-field>
+  <button class="button is-primary" type="submit">Отправить</button>
+</form>
+{% endblock %}
