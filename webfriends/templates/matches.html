@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-4">Мои матчи</h2>
+{% if users %}
+<ul>
+  {% for u in users %}
+  <li><a href="{{ url_for('chat_view', user_id=u.id) }}">{{ u.username }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Матчей пока нет.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,3 @@
+__pycache__/
+webfriends/static/uploads/
+*.db

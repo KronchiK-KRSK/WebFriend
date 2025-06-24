@@ -1,6 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2 class="title is-4 mb-3">Гео-Карта живых событий</h2>
+<div class="columns">
+  <div class="column">
+    <b-field label="Поиск">
+      <b-input id="search" placeholder="Название"></b-input>
+    </b-field>
+  </div>
+  <div class="column">
+    <b-field label="Пол">
+      <b-select id="filterGender">
+        <option value="">Любой</option>
+        <option value="male">Мужской</option>
+        <option value="female">Женский</option>
+      </b-select>
+    </b-field>
+  </div>
+</div>
 <div id="map" style="height:500px;"></div>
 <a href="/create-event" class="button is-primary fab">
     <span class="icon"><i class="fas fa-plus"></i></span>

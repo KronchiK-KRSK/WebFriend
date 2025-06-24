@@ -1,12 +1,37 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2 class="title is-4 mb-4">Регистрация</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <b-field label="Имя пользователя">
     <b-input name="username" required></b-input>
   </b-field>
+  <b-field label="Email">
+    <b-input name="email" type="email"></b-input>
+  </b-field>
+  <b-field label="Телефон">
+    <b-input name="phone"></b-input>
+  </b-field>
   <b-field label="Пароль">
     <b-input name="password" type="password" required></b-input>
+  </b-field>
+  <b-field label="Пол">
+    <b-select name="gender">
+      <option value="">-</option>
+      <option value="male">Мужской</option>
+      <option value="female">Женский</option>
+    </b-select>
+  </b-field>
+  <b-field label="Возраст">
+    <b-input name="age" type="number" min="18"></b-input>
+  </b-field>
+  <b-field label="О себе">
+    <b-input name="about"></b-input>
+  </b-field>
+  <b-field label="Соцсети">
+    <b-input name="social"></b-input>
+  </b-field>
+  <b-field label="Фото профиля">
+    <b-input name="photo" type="file" accept="image/*"></b-input>
   </b-field>
   <div class="mt-4">
     <button class="button is-primary" type="submit">Создать аккаунт</button>
