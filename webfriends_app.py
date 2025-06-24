@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, redirect
 
 app = Flask(__name__, template_folder='webfriends/templates', static_folder='webfriends/static')
 
@@ -8,6 +8,8 @@ EVENTS = [
     {"id": 2, "lat": 55.757, "lng": 37.615, "title": "Гуляем с собакой", "description": "Присоединяйся!"},
     {"id": 3, "lat": 55.75, "lng": 37.605, "title": "Бег по набережной", "description": "Легкая пробежка"}
 ]
+
+USER = {"name": "", "city": "", "status": "", "interests": ""}
 
 CARDS = [
     {"id": 1, "image": "https://source.unsplash.com/random/400x300?sig=1", "question": "Выбери мем, который тебе ближе"},
@@ -23,9 +25,21 @@ def index():
 def map_view():
     return render_template('map.html', title='Карта')
 
-@app.route('/events')
+@app.route('/events', methods=['GET'])
 def events_api():
     return jsonify(EVENTS)
+
+@app.route('/add_event', methods=['POST'])
+def add_event():
+    new = {
+        "id": len(EVENTS) + 1,
+        "lat": float(request.form['lat']),
+        "lng": float(request.form['lng']),
+        "title": request.form['title'],
+        "description": request.form['description'],
+    }
+    EVENTS.append(new)
+    return redirect('/map')
 
 @app.route('/cards')
 def cards_view():
@@ -38,6 +52,23 @@ def feed_view():
 @app.route('/chat')
 def chat_view():
     return render_template('chat.html', title='SpeedMeet')
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile_view():
+    if request.method == 'POST':
+        USER['name'] = request.form.get('name', '')
+        USER['city'] = request.form.get('city', '')
+        USER['status'] = request.form.get('status', '')
+        USER['interests'] = request.form.get('interests', '')
+    return render_template('profile.html', title='Профиль', user=USER)
+
+
+@app.route('/create-event', methods=['GET', 'POST'])
+def create_event_view():
+    if request.method == 'POST':
+        return add_event()
+    return render_template('create_event.html', title='Создать событие')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2 class="mb-3">SpeedMeet (демо)</h2>
+<h2 class="title is-4 mb-3">SpeedMeet (демо)</h2>
 <p>Откройте эту страницу в двух окнах браузера для демонстрации видеосвязи.</p>
-<video id="local" autoplay playsinline muted class="border"></video>
-<video id="remote" autoplay playsinline class="border mt-2"></video>
+<video id="local" autoplay playsinline muted class="box"></video>
+<video id="remote" autoplay playsinline class="box mt-4"></video>
 <script>
 let pc = new RTCPeerConnection();
 let local = document.getElementById('local');

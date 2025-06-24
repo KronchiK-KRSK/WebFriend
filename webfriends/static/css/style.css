@@ -1,6 +1,7 @@
 body {
     background: linear-gradient(120deg, #f0f4ff 0%, #e7fff9 100%);
     min-height: 100vh;
+    padding-bottom: 4rem;
 }
 .hero {
     text-align: center;
@@ -10,4 +11,12 @@ body {
     max-width: 220px;
     border-radius: 50%;
     box-shadow: 0 4px 16px #0002;
+}
+.navbar.is-fixed-bottom .icon {
+    font-size: 1.5rem;
+}
+.fab {
+    position: fixed;
+    bottom: 5rem;
+    right: 1rem;
 }
