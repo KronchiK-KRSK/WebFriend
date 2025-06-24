@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2 class="title is-4 mb-4">Профиль</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <b-field label="Имя пользователя">
     <b-input :value="user.username" disabled></b-input>
   </b-field>
@@ -14,8 +14,35 @@
   <b-field label="Интересы">
     <b-input name="interests" value="{{ user.interests }}"></b-input>
   </b-field>
-  <div class="mt-4">
-    <button class="button is-primary" type="submit">Сохранить</button>
+  <b-field label="О себе">
+    <b-input name="about" value="{{ user.about }}"></b-input>
+  </b-field>
+  <b-field label="Соцсети">
+    <b-input name="social" value="{{ user.social }}"></b-input>
+  </b-field>
+  <b-field label="Фото профиля">
+    <b-input name="photo" type="file" accept="image/*"></b-input>
+  </b-field>
+  <b-field label="Режим невидимки">
+    <b-switch name="is_private" {{ 'checked' if user.is_private else '' }}></b-switch>
+  </b-field>
+  <b-field label="Широта">
+    <b-input name="lat" value="{{ user.lat }}" type="number" step="any"></b-input>
+  </b-field>
+  <b-field label="Долгота">
+    <b-input name="lng" value="{{ user.lng }}" type="number" step="any"></b-input>
+  </b-field>
+  {% if user.photo %}
+  <div class="mb-3">
+    <img src="{{ url_for('static', filename='uploads/' + user.photo) }}" style="max-width:150px;">
   </div>
+  {% endif %}
+<div class="mt-4">
+  <button class="button is-primary" type="submit">Сохранить</button>
+</div>
 </form>
+<div class="mt-4">
+  <a href="{{ url_for('change_password') }}" class="button is-light">Сменить пароль</a>
+  <a href="{{ url_for('matches_view') }}" class="button is-link ml-2">Мои матчи</a>
+</div>
 {% endblock %}
