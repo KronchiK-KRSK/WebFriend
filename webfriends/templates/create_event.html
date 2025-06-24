@@ -8,6 +8,16 @@
   <b-field label="Описание">
     <b-input name="description" required></b-input>
   </b-field>
+  <b-field label="Категория">
+    <b-select name="category">
+      <option value="meet">Встреча</option>
+      <option value="sport">Спорт</option>
+      <option value="party">Тусовка</option>
+    </b-select>
+  </b-field>
+  <b-field label="Безопасная точка">
+    <b-checkbox name="is_safe"></b-checkbox>
+  </b-field>
   <b-field label="Широта">
     <b-input name="lat" type="number" step="any" required></b-input>
   </b-field>

@@ -1,15 +1,35 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2 class="title is-4 mb-3">Чат с {{ other.username }}</h2>
-<div class="box" style="max-height:300px; overflow-y:auto;">
+<div id="messages" class="box" style="max-height:300px; overflow-y:auto;">
   {% for m in messages %}
     <p><b>{{ 'Вы' if m.sender_id==current_user.id else other.username }}:</b> {{ m.text }}</p>
   {% endfor %}
 </div>
-<form method="post" class="mt-4">
+<form class="mt-4" id="sendForm">
   <b-field>
-    <b-input name="text" required></b-input>
+    <b-input id="text" required></b-input>
   </b-field>
-  <button class="button is-primary" type="submit">Отправить</button>
+  <button id="sendBtn" class="button is-primary">Отправить</button>
 </form>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+const socket = io();
+const otherId = {{ other.id }};
+socket.emit('join', {other_id: otherId});
+socket.on('new_message', data => {
+  const div = document.getElementById('messages');
+  const p = document.createElement('p');
+  p.innerHTML = `<b>${data.sender}:</b> ${data.text}`;
+  div.appendChild(p);
+});
+document.getElementById('sendForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const input = document.getElementById('text');
+  const text = input.value.trim();
+  if(!text) return;
+  socket.emit('send_message', {other_id: otherId, text});
+  input.value = '';
+});
+</script>
 {% endblock %}

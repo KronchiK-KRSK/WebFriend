@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-3">Новый статус</h2>
+<form method="post">
+  <b-field label="Статус">
+    <b-input name="text" maxlength="250" required></b-input>
+  </b-field>
+  <button class="button is-primary" type="submit">Опубликовать</button>
+</form>
+{% endblock %}
