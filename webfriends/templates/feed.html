@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="mb-3">Пульс города</h2>
+<div class="list-group">
+  {% for p in feed %}
+  <div class="list-group-item list-group-item-action mb-2 animate__animated animate__fadeInUp">
+    <h5 class="mb-1">{{ p.title }}</h5>
+    <p class="mb-1">{{ p.description }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
