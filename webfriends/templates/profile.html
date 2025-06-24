@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-4">Профиль</h2>
+<form method="post">
+  <b-field label="Имя">
+    <b-input name="name" value="{{ user.name }}"></b-input>
+  </b-field>
+  <b-field label="Город">
+    <b-input name="city" value="{{ user.city }}"></b-input>
+  </b-field>
+  <b-field label="Статус">
+    <b-input name="status" value="{{ user.status }}"></b-input>
+  </b-field>
+  <b-field label="Интересы">
+    <b-input name="interests" value="{{ user.interests }}"></b-input>
+  </b-field>
+  <div class="mt-4">
+    <button class="button is-primary" type="submit">Сохранить</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-4">Создать событие</h2>
+<form method="post">
+  <b-field label="Название">
+    <b-input name="title" required></b-input>
+  </b-field>
+  <b-field label="Описание">
+    <b-input name="description" required></b-input>
+  </b-field>
+  <b-field label="Широта">
+    <b-input name="lat" type="number" step="any" required></b-input>
+  </b-field>
+  <b-field label="Долгота">
+    <b-input name="lng" type="number" step="any" required></b-input>
+  </b-field>
+  <div class="mt-4">
+    <button class="button is-primary" type="submit">Добавить</button>
+  </div>
+</form>
+{% endblock %}

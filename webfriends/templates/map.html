@@ -1,7 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2 class="mb-3">Гео-Карта живых событий</h2>
+<h2 class="title is-4 mb-3">Гео-Карта живых событий</h2>
 <div id="map" style="height:500px;"></div>
+<a href="/create-event" class="button is-primary fab">
+    <span class="icon"><i class="fas fa-plus"></i></span>
+</a>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>

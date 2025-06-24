@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2 class="mb-3">Swipe & Play</h2>
+<h2 class="title is-4 mb-3">Swipe & Play</h2>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <div class="swiper" style="width:300px; height:400px;">
   <div class="swiper-wrapper">
   {% for c in cards %}
-    <div class="swiper-slide d-flex flex-column justify-content-center align-items-center bg-light p-3 rounded">
+    <div class="swiper-slide has-background-light p-3 is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
         <img src="{{ c.image }}" class="mb-3" style="max-width:100%; height:150px; object-fit:cover; border-radius:8px;">
-        <p class="fw-bold">{{ c.question }}</p>
+        <p class="has-text-weight-semibold">{{ c.question }}</p>
     </div>
   {% endfor %}
   </div>
