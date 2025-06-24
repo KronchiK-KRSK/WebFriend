@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-4">Вход</h2>
+<form method="post">
+  <b-field label="Имя пользователя">
+    <b-input name="username" required></b-input>
+  </b-field>
+  <b-field label="Пароль">
+    <b-input name="password" type="password" required></b-input>
+  </b-field>
+  <div class="mt-4">
+    <button class="button is-primary" type="submit">Войти</button>
+    <a href="{{ url_for('register') }}" class="button is-text">Регистрация</a>
+  </div>
+</form>
+{% endblock %}

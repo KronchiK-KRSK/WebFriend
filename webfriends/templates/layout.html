@@ -14,6 +14,13 @@
 <div id="app">
     <section class="section">
         <div class="container">
+            <div class="is-flex is-justify-content-flex-end mb-2">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}">Выход</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Вход</a>
+                {% endif %}
+            </div>
             {% block content %}{% endblock %}
         </div>
     </section>
@@ -22,14 +29,14 @@
             <a class="navbar-item has-text-white" href="/">
                 <span class="icon is-large"><i class="fas fa-home"></i></span>
             </a>
-            <a class="navbar-item has-text-white" href="/cards">
+            <a class="navbar-item has-text-white" href="/swipe">
                 <span class="icon is-large"><i class="fas fa-heart"></i></span>
             </a>
             <a class="navbar-item has-text-white" href="/map">
                 <span class="icon is-large"><i class="fas fa-map-marker-alt"></i></span>
             </a>
-            <a class="navbar-item has-text-white" href="/chat">
-                <span class="icon is-large"><i class="fas fa-comments"></i></span>
+            <a class="navbar-item has-text-white" href="/feed">
+                <span class="icon is-large"><i class="fas fa-stream"></i></span>
             </a>
             <a class="navbar-item has-text-white" href="/profile">
                 <span class="icon is-large"><i class="fas fa-user"></i></span>

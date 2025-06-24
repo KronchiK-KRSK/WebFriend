@@ -1,27 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2 class="title is-4 mb-3">SpeedMeet (демо)</h2>
-<p>Откройте эту страницу в двух окнах браузера для демонстрации видеосвязи.</p>
-<video id="local" autoplay playsinline muted class="box"></video>
-<video id="remote" autoplay playsinline class="box mt-4"></video>
-<script>
-let pc = new RTCPeerConnection();
-let local = document.getElementById('local');
-let remote = document.getElementById('remote');
-navigator.mediaDevices.getUserMedia({video:true,audio:true}).then(stream=>{
-  local.srcObject = stream;
-  stream.getTracks().forEach(t=>pc.addTrack(t,stream));
-  pc.createOffer().then(o=>pc.setLocalDescription(o));
-});
-pc.ontrack = ev => { remote.srcObject = ev.streams[0]; };
-window.onhashchange = async ()=>{
-  if(location.hash.startsWith('#')){
-    let offer = JSON.parse(atob(location.hash.slice(1)));
-    await pc.setRemoteDescription(offer);
-    let ans = await pc.createAnswer();
-    await pc.setLocalDescription(ans);
-    alert('Скопируйте эту ссылку и откройте в другом окне:\n'+location.origin+location.pathname+'#'+btoa(JSON.stringify(ans)));
-  }
-};
-</script>
+<h2 class="title is-4 mb-3">Чат с {{ other.username }}</h2>
+<div class="box" style="max-height:300px; overflow-y:auto;">
+  {% for m in messages %}
+    <p><b>{{ 'Вы' if m.sender_id==current_user.id else other.username }}:</b> {{ m.text }}</p>
+  {% endfor %}
+</div>
+<form method="post" class="mt-4">
+  <b-field>
+    <b-input name="text" required></b-input>
+  </b-field>
+  <button class="button is-primary" type="submit">Отправить</button>
+</form>
 {% endblock %}
