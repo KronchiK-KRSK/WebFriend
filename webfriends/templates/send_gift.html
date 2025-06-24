@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title is-4 mb-4">Отправить подарок {{ target.username }}</h2>
+<form method="post">
+  <b-field label="Подарок">
+    <b-select name="gift_id">
+      {% for g in gifts %}
+      <option value="{{ g.id }}">{{ g.name }}</option>
+      {% endfor %}
+    </b-select>
+  </b-field>
+  <button class="button is-primary" type="submit">Отправить</button>
+</form>
+{% endblock %}
